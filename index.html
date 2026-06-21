@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Zen Workspace — 看板 PRO</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <div class="creator-info">
+        <h1>看板 &mdash; Zen Workspace PRO</h1>
+        <p>
+          Developer: <strong>Om Sharma</strong> | Contact:
+          <strong>omsharma7248@gmail.com</strong>
+        </p>
+      </div>
+      <div class="action-controls">
+        <button class="btn" onclick="toggleTheme()">🌓 Theme</button>
+        <button class="btn" onclick="openModal()">+ Add Complex Task</button>
+        <a href="https://digitalheroesco.com" target="_blank" class="hero-btn"
+          >Built for Digital Heroes</a
+        >
+      </div>
+    </header>
+
+    <div class="workspace-bar" id="workspaceTabs">
+      <button class="workspace-tab active" onclick="switchWorkspace('default')">
+        ⛩️ Main Project
+      </button>
+      <button class="workspace-tab" onclick="switchWorkspace('personal')">
+        🎋 Personal Sprints
+      </button>
+      <button class="workspace-tab" onclick="createNewWorkspace()">
+        + New Workspace
+      </button>
+    </div>
+
+    <div class="metrics-row">
+      <div class="metric-card">
+        <div class="num" id="m-total">0</div>
+        <div class="label">Active Tasks</div>
+      </div>
+      <div class="metric-card">
+        <div class="num" id="m-done">0</div>
+        <div class="label">Completed</div>
+      </div>
+      <div class="metric-card">
+        <div class="num" id="m-progress">0%</div>
+        <div class="label">Completion Rate</div>
+      </div>
+      <div class="metric-card">
+        <div class="num" id="m-time" style="font-family: monospace">00:00</div>
+        <div class="label">Focus Invested</div>
+      </div>
+    </div>
+
+    <main class="board-grid">
+      <div class="column">
+        <div class="column-header">
+          <span>To Do / 未着手</span><span id="b-todo">0</span>
+        </div>
+        <div class="task-list" id="l-todo"></div>
+      </div>
+      <div class="column">
+        <div class="column-header">
+          <span>In Progress / 進行中</span><span id="b-inprogress">0</span>
+        </div>
+        <div class="task-list" id="l-inprogress"></div>
+      </div>
+      <div class="column">
+        <div class="column-header">
+          <span>Review / 確認中</span><span id="b-review">0</span>
+        </div>
+        <div class="task-list" id="l-review"></div>
+      </div>
+      <div class="column">
+        <div class="column-header">
+          <span>Done / 完了</span><span id="b-done">0</span>
+        </div>
+        <div class="task-list" id="l-done"></div>
+      </div>
+    </main>
+
+    <div
+      class="modal-overlay"
+      id="taskModal"
+      onclick="if (event.target === this) closeModal();"
+    >
+      <div class="modal-box">
+        <h3>Configure Task Structure</h3>
+        <form id="taskForm" onsubmit="saveComplexTask(event)">
+          <div class="field">
+            <label for="titleInput">Task Title</label>
+            <input
+              type="text"
+              id="titleInput"
+              required
+              placeholder="Core action target..."
+            />
+          </div>
+          <div class="field">
+            <label for="descInput">Description Context</label>
+            <textarea
+              id="descInput"
+              rows="2"
+              placeholder="Functional specifics..."
+            ></textarea>
+          </div>
+          <div class="field">
+            <label>Subtask Checklist Matrix</label>
+            <div class="subtask-builder-row">
+              <input
+                type="text"
+                id="subtaskSubInput"
+                placeholder="Add explicit sub-step milestone..."
+              />
+              <button
+                type="button"
+                class="btn"
+                style="flex: none"
+                onclick="injectSubtaskChip()"
+              >
+                + Add
+              </button>
+            </div>
+            <div class="subtask-chip-container" id="subtaskChips"></div>
+          </div>
+          <div class="field">
+            <label for="priorityInput">Priority Seal</label>
+            <select id="priorityInput">
+              <option value="low">Low Priority</option>
+              <option value="medium" selected>Medium Priority</option>
+              <option value="high">High Priority</option>
+            </select>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn" onclick="closeModal()">
+              Cancel
+            </button>
+            <button
+              type="submit"
+              class="btn"
+              style="background: var(--text-main); color: var(--bg-color)"
+            >
+              Commit Structure
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <footer>
+      <p>
+        Zen Workspace Matrix &bull; High-Performance Pure Client-Side
+        Architecture &bull; 2026
+      </p>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>
